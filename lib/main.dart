@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import './consts.dart';
 import './enums.dart';
 
-import './widgets/tasks_column.dart';
-import './widgets/custom_app_bar.dart';
+import './screens/tasks_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,41 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  List<TaskStatus> categories = [
-    TaskStatus.Open,
-    TaskStatus.InProgress,
-    TaskStatus.Done
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          CustomAppBar(),
-          Expanded(
-            child: Row(
-              children: categories
-                  .map(
-                    (e) => Expanded(
-                      child: TasksColumn(e),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ),
-        ],
-      ),
+      home: TasksScreen(),
     );
   }
 }

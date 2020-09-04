@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../enums.dart';
 import '../consts.dart';
 import './task_card.dart';
+import './add_task.dart';
 
 class TasksColumn extends StatelessWidget {
   final TaskStatus category;
@@ -50,7 +51,13 @@ class TasksColumn extends StatelessWidget {
                     borderRadius: kTaskColumnDefaultBorderRadius,
                   ),
                   icon: Icon(Icons.add),
-                  onPressed: () {},
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) => AddTaskBottomSheet(),
+                    );
+                  },
                   label: Text(
                     "Add Task",
                     style: TextStyle(
@@ -78,9 +85,6 @@ class TasksColumn extends StatelessWidget {
               child: ListView(
                 physics: BouncingScrollPhysics(),
                 children: [
-                  TaskCard(categoryColor),
-                  TaskCard(categoryColor),
-                  TaskCard(categoryColor),
                   TaskCard(categoryColor),
                   TaskCard(categoryColor),
                 ],

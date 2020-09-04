@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 
@@ -22,29 +23,7 @@ class CustomAppBar extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "2020/02/02",
-                  style: TextStyle(
-                    fontFamily: "Rubik",
-                    fontSize: 15,
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  "10:34:07",
-                  style: TextStyle(
-                    fontFamily: "Rubik",
-                    fontSize: 15,
-                  ),
-                ),
-              ],
-            ),
+            child: CustomClock(),
           ),
           Expanded(
             child: Text(
@@ -84,6 +63,60 @@ class CustomAppBar extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class CustomClock extends StatefulWidget {
+  @override
+  _CustomClockState createState() => _CustomClockState();
+}
+
+class _CustomClockState extends State<CustomClock> {
+  Timer _clockTimer;
+
+  @override
+  void initState() {
+    _clockTimer = Timer.periodic(
+      Duration(seconds: 1),
+      (timer) => setState(
+        () {},
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    if (_clockTimer != null) _clockTimer.cancel();
+    _clockTimer = null;
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final _now = DateTime.now();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "${_now.year}/${_now.month}/${_now.day}",
+          style: TextStyle(
+            fontFamily: "Rubik",
+            fontSize: 15,
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(
+          "${_now.hour}:${_now.minute}:${_now.second}",
+          style: TextStyle(
+            fontFamily: "Rubik",
+            fontSize: 15,
+          ),
+        ),
+      ],
     );
   }
 }
