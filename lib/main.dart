@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import './consts.dart';
+import './enums.dart';
+
+import './widgets/tasks_column.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,6 +27,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<TaskStatus> categories = [
+    TaskStatus.Open,
+    TaskStatus.InProgress,
+    TaskStatus.Done
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +42,14 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(fontFamily: "Rubik"),
         ),
       ),
-      body: Center(
-        child: Text(
-          "It's gonna be fun",
-          style: TextStyle(fontFamily: "Rubik"),
-        ),
+      body: Row(
+        children: categories
+            .map(
+              (e) => Expanded(
+                child: TasksColumn(e),
+              ),
+            )
+            .toList(),
       ),
     );
   }
