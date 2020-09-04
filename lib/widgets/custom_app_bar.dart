@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import '../helpers/datetime_helpers.dart';
 
 class CustomAppBar extends StatelessWidget {
   @override
@@ -83,6 +84,7 @@ class _CustomClockState extends State<CustomClock> {
         () {},
       ),
     );
+    super.initState();
   }
 
   @override
@@ -100,7 +102,7 @@ class _CustomClockState extends State<CustomClock> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "${_now.year}/${_now.month}/${_now.day}",
+          dateStringMaker(_now),
           style: TextStyle(
             fontFamily: "Rubik",
             fontSize: 15,
@@ -110,7 +112,7 @@ class _CustomClockState extends State<CustomClock> {
           height: 5,
         ),
         Text(
-          "${_now.hour}:${_now.minute}:${_now.second}",
+          timeStringMaker(_now),
           style: TextStyle(
             fontFamily: "Rubik",
             fontSize: 15,
