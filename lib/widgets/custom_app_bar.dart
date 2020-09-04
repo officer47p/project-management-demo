@@ -41,14 +41,17 @@ class CustomAppBar extends StatelessWidget {
                 Text(
                   "olivescode@gmail.com",
                   style: TextStyle(
-                      fontFamily: "Rubik", fontSize: 15, color: Colors.blue),
+                    fontFamily: "Rubik",
+                    fontSize: 15,
+                    color: Colors.blue,
+                  ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(7),
+                  padding: const EdgeInsets.all(7).copyWith(right: 0),
                   child: NeuButton(
                     bevel: 5,
                     decoration: NeumorphicDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
                     onPressed: () {},
