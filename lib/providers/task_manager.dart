@@ -14,7 +14,7 @@ class Task {
 class TaskManager extends ChangeNotifier {
   List<Task> _tasks = [
     Task(
-      title: "HEy",
+      title: "Hey",
       description:
           "This is the description. Normally it's longer and contains\nline breaks that user specifys.",
       deadLine: DateTime.now(),

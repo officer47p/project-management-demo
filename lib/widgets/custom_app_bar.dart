@@ -3,21 +3,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import '../helpers/datetime_helpers.dart';
+import 'package:neumorphic/neumorphic.dart';
 
 class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return NeuCard(
       height: 56,
+      curveType: CurveType.emboss,
       margin: EdgeInsets.all(10).copyWith(bottom: 0),
       padding: EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        // color: Colors.black38,
-        gradient: RadialGradient(colors: [
-          // Color(0xff0f2027),
-          Color(0xff111111),
-          Color(0xff434343),
-        ], radius: 10),
+      decoration: NeumorphicDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -46,22 +43,31 @@ class CustomAppBar extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: "Rubik", fontSize: 15, color: Colors.blue),
                 ),
-                FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      Icon(Icons.exit_to_app),
-                      Text(
-                        "Log Out",
-                        style: TextStyle(
-                          fontFamily: "Rubik",
-                          fontSize: 15,
+                Padding(
+                  padding: const EdgeInsets.all(7),
+                  child: NeuButton(
+                    bevel: 5,
+                    decoration: NeumorphicDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.exit_to_app,
+                          size: 18,
                         ),
-                      ),
-                    ],
+                        Text(
+                          "Log Out",
+                          style: TextStyle(
+                            fontFamily: "Rubik",
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

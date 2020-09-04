@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../consts.dart';
 import '../providers/task_manager.dart';
+import 'package:neumorphic/neumorphic.dart';
 
 class TaskCard extends StatelessWidget {
   final Task task;
@@ -8,19 +9,15 @@ class TaskCard extends StatelessWidget {
   TaskCard(this.task, this.categoryColor);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return NeuCard(
+      curveType: CurveType.flat,
       margin: EdgeInsets.all(10),
       width: double.infinity,
       // height: 300,
-      decoration: BoxDecoration(
-        color: Color(0xff737373),
+      decoration: NeumorphicDecoration(
+        color: Color(0xff2A2A2A),
+        // Color(0xff545454),
         borderRadius: kTaskColumnDefaultBorderRadius,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black38,
-            blurRadius: 10,
-          )
-        ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -38,25 +35,39 @@ class TaskCard extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black38,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {},
+                Row(
+                  children: [
+                    NeuButton(
+                      bevel: 7,
+                      decoration: NeumorphicDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topLeft: Radius.circular(10),
+                        ),
+                        color: Color(0xff2A2A2A),
+                      ),
+                      child: Icon(
+                        Icons.edit,
                         color: Colors.blue,
                       ),
-                      IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {},
+                      onPressed: () {},
+                    ),
+                    NeuButton(
+                      bevel: 7,
+                      decoration: NeumorphicDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        ),
+                        color: Color(0xff2A2A2A),
+                      ),
+                      child: Icon(
+                        Icons.delete,
                         color: Colors.red,
-                      )
-                    ],
-                  ),
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
                 )
               ],
             ),
@@ -110,13 +121,21 @@ class TaskCard extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                Chip(
-                  avatar: Icon(Icons.date_range),
-                  label: Text(
-                    "2020/4/9 21:00:00",
-                    style: TextStyle(fontFamily: "Rubik"),
+                NeuCard(
+                  curveType: CurveType.emboss,
+                  decoration: NeumorphicDecoration(
+                    color: Color(0xff2A2A2A),
                   ),
-                ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.date_range),
+                      Text(
+                        "2020/4/9 21:00:00",
+                        style: TextStyle(fontFamily: "Rubik"),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ],

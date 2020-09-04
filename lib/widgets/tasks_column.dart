@@ -5,6 +5,7 @@ import './task_card.dart';
 import './add_task.dart';
 import 'package:provider/provider.dart';
 import '../providers/task_manager.dart';
+import 'package:neumorphic/neumorphic.dart';
 
 class TasksColumn extends StatelessWidget {
   final TaskStatus category;
@@ -49,11 +50,12 @@ class TasksColumn extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                FlatButton.icon(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: kTaskColumnDefaultBorderRadius,
+                NeuButton(
+                  bevel: 7,
+                  decoration: NeumorphicDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  icon: Icon(Icons.add),
                   onPressed: () async {
                     await showModalBottomSheet(
                       isScrollControlled: true,
@@ -61,13 +63,18 @@ class TasksColumn extends StatelessWidget {
                       builder: (context) => AddTaskBottomSheet(),
                     );
                   },
-                  label: Text(
-                    "Add Task",
-                    style: TextStyle(
-                      fontFamily: "Rubik",
-                    ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.add),
+                      Text(
+                        "Add Task",
+                        style: TextStyle(
+                          fontFamily: "Rubik",
+                        ),
+                      ),
+                    ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -83,16 +90,18 @@ class TasksColumn extends StatelessWidget {
                     spreadRadius: 2,
                   )
                 ],
-                color: Color(0xff545454),
+                color: Color(0xff2A2A2A),
+                //  Color(0xff545454),
               ),
               child: tasks.isEmpty
                   ? Center(
                       child: Text(
-                        "No Tasks To Show",
+                        "No $categoryName Task To Show\n🙄",
                         style: TextStyle(
                           fontFamily: "Rubik",
                           fontSize: 24,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     )
                   : ListView(
