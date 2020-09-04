@@ -60,7 +60,8 @@ class TasksColumn extends StatelessWidget {
                     await showModalBottomSheet(
                       isScrollControlled: true,
                       context: context,
-                      builder: (context) => AddTaskBottomSheet(),
+                      builder: (context) =>
+                          AddTaskBottomSheet(status: category),
                     );
                   },
                   child: Row(

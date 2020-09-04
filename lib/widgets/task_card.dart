@@ -10,6 +10,7 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NeuCard(
+      bevel: 8,
       curveType: CurveType.flat,
       margin: EdgeInsets.all(10),
       width: double.infinity,
