@@ -7,6 +7,8 @@ class TasksColumn extends StatelessWidget {
   final TaskStatus category;
   TasksColumn(this.category);
 
+  EdgeInsets innerContentPadding = EdgeInsets.all(10);
+
   String get categoryName {
     if (category == TaskStatus.Open)
       return "Open";
@@ -19,7 +21,7 @@ class TasksColumn extends StatelessWidget {
     if (category == TaskStatus.Open)
       return Colors.green;
     else if (category == TaskStatus.InProgress)
-      return Colors.amber;
+      return Colors.orange;
     else if (category == TaskStatus.Done) return Colors.blue;
   }
 
@@ -39,7 +41,8 @@ class TasksColumn extends StatelessWidget {
                   categoryName,
                   style: TextStyle(
                     fontFamily: "Rubik",
-                    fontSize: 25,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 FlatButton.icon(
@@ -60,6 +63,7 @@ class TasksColumn extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              padding: innerContentPadding,
               decoration: BoxDecoration(
                 borderRadius: kTaskColumnDefaultBorderRadius,
                 boxShadow: [
@@ -73,7 +77,7 @@ class TasksColumn extends StatelessWidget {
               ),
               child: ListView(
                 children: [
-                  // TaskCard(),
+                  TaskCard(categoryColor),
                 ],
               ),
             ),

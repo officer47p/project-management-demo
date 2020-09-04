@@ -3,6 +3,7 @@ import './consts.dart';
 import './enums.dart';
 
 import './widgets/tasks_column.dart';
+import './widgets/custom_app_bar.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,21 +36,21 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Task Flow",
-          style: TextStyle(fontFamily: "Rubik"),
-        ),
-      ),
-      body: Row(
-        children: categories
-            .map(
-              (e) => Expanded(
-                child: TasksColumn(e),
-              ),
-            )
-            .toList(),
+      body: Column(
+        children: [
+          CustomAppBar(),
+          Expanded(
+            child: Row(
+              children: categories
+                  .map(
+                    (e) => Expanded(
+                      child: TasksColumn(e),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

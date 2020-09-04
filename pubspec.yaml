@@ -66,6 +66,10 @@ flutter:
         - asset: assets/fonts/Rubik-Regular.ttf
         - asset: assets/fonts/Rubik-Bold.ttf
           weight: 700
+    - family: Lobster
+      fonts:
+        - asset: assets/fonts/Lobster-Regular.ttf
+          
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
