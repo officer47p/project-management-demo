@@ -17,13 +17,35 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                "Add A New Task:",
-                style: TextStyle(
-                  fontFamily: "Rubik",
-                  fontSize: 30,
-                ),
-                textAlign: TextAlign.left,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Add A New Task:",
+                    style: TextStyle(
+                      fontFamily: "Rubik",
+                      fontSize: 30,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  FlatButton(
+                    padding: EdgeInsets.all(5),
+                    onPressed: () {},
+                    // color: Colors.grey,
+                    child: Row(
+                      children: [
+                        Icon(Icons.save),
+                        Text(
+                          "Submit",
+                          style: TextStyle(
+                            fontFamily: "Rubik",
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
               SizedBox(
                 height: 20,
@@ -41,15 +63,25 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               SizedBox(
                 height: 15,
               ),
+              Text(
+                "Dead Line: ",
+                style: TextStyle(
+                  fontFamily: "Rubik",
+                  fontSize: 30,
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
-                  Text(
-                    "Date: ",
-                    style: TextStyle(
-                      fontFamily: "Rubik",
-                      fontSize: 30,
-                    ),
-                  ),
+                  // Text(
+                  //   "Date: ",
+                  //   style: TextStyle(
+                  //     fontFamily: "Rubik",
+                  //     fontSize: 30,
+                  //   ),
+                  // ),
                   Expanded(
                     child: CustomTextField(
                       labelText: "Year",
@@ -67,12 +99,15 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       labelText: "Day",
                     ),
                   ),
-                  Text(
-                    " Time: ",
-                    style: TextStyle(
-                      fontFamily: "Rubik",
-                      fontSize: 30,
-                    ),
+                  // Text(
+                  //   " Time: ",
+                  //   style: TextStyle(
+                  //     fontFamily: "Rubik",
+                  //     fontSize: 30,
+                  //   ),
+                  // ),
+                  SizedBox(
+                    width: 40,
                   ),
                   Expanded(
                     child: CustomTextField(
@@ -86,7 +121,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     ),
                   ),
                 ],
-              )
+              ),
+              // SizedBox(
+              //   height: 15,
+              // ),
             ],
           ),
         ),

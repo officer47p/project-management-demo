@@ -51,12 +51,17 @@ class CustomAppBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   onPressed: () {},
-                  child: Text(
-                    "Log Out",
-                    style: TextStyle(
-                      fontFamily: "Rubik",
-                      fontSize: 15,
-                    ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.exit_to_app),
+                      Text(
+                        "Log Out",
+                        style: TextStyle(
+                          fontFamily: "Rubik",
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
