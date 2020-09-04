@@ -15,10 +15,11 @@ class TaskManager extends ChangeNotifier {
   List<Task> _tasks = [
     Task(
       title: "HEy",
-      description: "kjdf d skfj dsjkf",
+      description:
+          "This is the description. Normally it's longer and contains\nline breaks that user specifys.",
       deadLine: DateTime.now(),
       id: "fjdbskjfbsdjkb",
-      taskStatus: TaskStatus.Done,
+      taskStatus: TaskStatus.Open,
     )
   ];
 
@@ -41,12 +42,13 @@ class TaskManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void editTask(
-      {String id,
-      String title,
-      String description,
-      DateTime deadLine,
-      TaskStatus taskStatus}) {
+  void editTask({
+    String id,
+    String title,
+    String description,
+    DateTime deadLine,
+    TaskStatus taskStatus,
+  }) {
     final index = _tasks.indexWhere((element) => element.id == id);
     _tasks[index] = Task(
       id: id,
@@ -55,6 +57,7 @@ class TaskManager extends ChangeNotifier {
       deadLine: deadLine,
       taskStatus: taskStatus,
     );
+    notifyListeners();
   }
 
   Task getTaskById(String id) {

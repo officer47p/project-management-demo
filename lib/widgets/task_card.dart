@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '../consts.dart';
+import '../providers/task_manager.dart';
 
 class TaskCard extends StatelessWidget {
+  final Task task;
   final Color categoryColor;
-  TaskCard(this.categoryColor);
+  TaskCard(this.task, this.categoryColor);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +31,7 @@ class TaskCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "This is the title",
+                  task.title,
                   style: TextStyle(
                     fontFamily: "Rubik",
                     fontSize: 24,
@@ -62,7 +64,7 @@ class TaskCard extends StatelessWidget {
               height: 15,
             ),
             Text(
-              "This is the description. Normally it's longer and contains\nline breaks that user specifys.",
+              task.description,
               style: TextStyle(
                 fontFamily: "Rubik",
                 fontSize: 18,

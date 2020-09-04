@@ -3,6 +3,8 @@ import '../enums.dart';
 import '../consts.dart';
 import './task_card.dart';
 import './add_task.dart';
+import 'package:provider/provider.dart';
+import '../providers/task_manager.dart';
 
 class TasksColumn extends StatelessWidget {
   final TaskStatus category;
@@ -28,6 +30,7 @@ class TasksColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tasks = Provider.of<TaskManager>(context).getTasksByStatus(category);
     return Padding(
       padding: kTaskColumnDefaultMargin,
       child: Column(
@@ -82,13 +85,22 @@ class TasksColumn extends StatelessWidget {
                 ],
                 color: Color(0xff545454),
               ),
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: [
-                  TaskCard(categoryColor),
-                  TaskCard(categoryColor),
-                ],
-              ),
+              child: tasks.isEmpty
+                  ? Center(
+                      child: Text(
+                        "No Tasks To Show",
+                        style: TextStyle(
+                          fontFamily: "Rubik",
+                          fontSize: 24,
+                        ),
+                      ),
+                    )
+                  : ListView(
+                      physics: BouncingScrollPhysics(),
+                      children: tasks
+                          .map((task) => TaskCard(task, categoryColor))
+                          .toList(),
+                    ),
             ),
           ),
         ],
