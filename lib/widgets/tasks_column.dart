@@ -7,7 +7,7 @@ class TasksColumn extends StatelessWidget {
   final TaskStatus category;
   TasksColumn(this.category);
 
-  EdgeInsets innerContentPadding = EdgeInsets.all(10);
+  // EdgeInsets innerContentPadding = EdgeInsets.all(10);
 
   String get categoryName {
     if (category == TaskStatus.Open)
@@ -63,7 +63,7 @@ class TasksColumn extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              padding: innerContentPadding,
+              // padding: innerContentPadding,
               decoration: BoxDecoration(
                 borderRadius: kTaskColumnDefaultBorderRadius,
                 boxShadow: [
@@ -76,7 +76,12 @@ class TasksColumn extends StatelessWidget {
                 color: Color(0xff545454),
               ),
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 children: [
+                  TaskCard(categoryColor),
+                  TaskCard(categoryColor),
+                  TaskCard(categoryColor),
+                  TaskCard(categoryColor),
                   TaskCard(categoryColor),
                 ],
               ),
