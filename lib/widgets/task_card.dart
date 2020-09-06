@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../consts.dart';
 import '../providers/task_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:neumorphic/neumorphic.dart';
+import './add_task.dart';
 
 class TaskCard extends StatelessWidget {
   final Task task;
@@ -51,7 +53,16 @@ class TaskCard extends StatelessWidget {
                         Icons.edit,
                         color: Colors.blue,
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (context) => AddTaskBottomSheet(
+                            status: task.taskStatus,
+                            defaultTask: task,
+                          ),
+                        );
+                      },
                     ),
                     NeuButton(
                       bevel: 7,
@@ -66,7 +77,9 @@ class TaskCard extends StatelessWidget {
                         Icons.delete,
                         color: Colors.red,
                       ),
-                      onPressed: () {},
+                      onPressed: () =>
+                          Provider.of<TaskManager>(context, listen: false)
+                              .deleteTask(task.id),
                     ),
                   ],
                 )

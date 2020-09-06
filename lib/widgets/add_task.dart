@@ -7,7 +7,8 @@ import '../providers/task_manager.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
   final TaskStatus status;
-  AddTaskBottomSheet({this.status});
+  final Task defaultTask;
+  AddTaskBottomSheet({this.status, this.defaultTask});
   @override
   _AddTaskBottomSheetState createState() => _AddTaskBottomSheetState();
 }
@@ -15,7 +16,30 @@ class AddTaskBottomSheet extends StatefulWidget {
 class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   final formKey = GlobalKey<FormState>();
   int _month;
-  Map task = {};
+  Map task = {
+    "title": "",
+    "description": "",
+    "year": "",
+    "month": "",
+    "day": "",
+    "hour": "",
+    "minute": "",
+  };
+
+  @override
+  void initState() {
+    if (widget.defaultTask != null) {
+      final dt = widget.defaultTask;
+      task["title"] = dt.title;
+      task["description"] = dt.description;
+      task["year"] = dt.deadLine.year.toString();
+      task["month"] = dt.deadLine.month.toString();
+      task["day"] = dt.deadLine.day.toString();
+      task["hour"] = dt.deadLine.hour.toString();
+      task["minute"] = dt.deadLine.minute.toString();
+    }
+    super.initState();
+  }
 
   void submit() {
     final form = formKey.currentState;
@@ -27,12 +51,22 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
           "${task['year'].toString().padLeft(4, '0')}-${task['month'].toString().padLeft(2, '0')}-${task['day'].toString().padLeft(2, '0')}T${task['hour'].toString().padLeft(2, '0')}:${task['minute'].toString().padLeft(2, '0')}");
       // print(deadLine);
       // print(DateTime.parse(deadLine));
-      Provider.of<TaskManager>(context, listen: false).addTask(
-        title: task["title"],
-        description: task["description"],
-        taskStatus: widget.status,
-        deadLine: deadLine,
-      );
+      if (widget.defaultTask != null) {
+        Provider.of<TaskManager>(context, listen: false).editTask(
+          id: widget.defaultTask.id,
+          title: task["title"],
+          description: task["description"],
+          taskStatus: widget.status,
+          deadLine: deadLine,
+        );
+      } else {
+        Provider.of<TaskManager>(context, listen: false).addTask(
+          title: task["title"],
+          description: task["description"],
+          taskStatus: widget.status,
+          deadLine: deadLine,
+        );
+      }
       Navigator.of(context).pop();
     }
   }
@@ -100,6 +134,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   height: 20,
                 ),
                 CustomTextField(
+                  initValue: task["title"],
                   labelText: "Title",
                   onSaved: (value) => task["title"] = value,
                   validator: (value) {
@@ -113,6 +148,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   height: 15,
                 ),
                 CustomTextField(
+                  initValue: task["description"],
                   labelText: "Description",
                   onSaved: (value) =>
                       task["description"] = value.isEmpty ? "" : value,
@@ -135,6 +171,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   children: [
                     Expanded(
                       child: CustomTextField(
+                        initValue: task["year"],
                         labelText: "Year",
                         onSaved: (value) => task["year"] = int.parse(value),
                         validator: (value) {
@@ -153,6 +190,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     Slash(),
                     Expanded(
                       child: CustomTextField(
+                        initValue: task["month"],
                         labelText: "Month",
                         onSaved: (value) => task["month"] = int.parse(value),
                         onChanged: (value) => _month = int.tryParse(value),
@@ -174,6 +212,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     Slash(),
                     Expanded(
                       child: CustomTextField(
+                        initValue: task["day"],
                         labelText: "Day",
                         onSaved: (value) => task["day"] = int.parse(value),
                         validator: (value) {
@@ -199,6 +238,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     ),
                     Expanded(
                       child: CustomTextField(
+                        initValue: task["hour"],
                         labelText: "Hour",
                         onSaved: (value) => task["hour"] = int.parse(value),
                         validator: (value) {
@@ -219,6 +259,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     Colon(),
                     Expanded(
                       child: CustomTextField(
+                        initValue: task["minute"],
                         labelText: "Minute",
                         onSaved: (value) => task["minute"] = int.parse(value),
                         validator: (value) {
@@ -285,12 +326,15 @@ class CustomTextField extends StatelessWidget {
   final String Function(String) validator;
   final void Function(String) onSaved;
   final void Function(String) onChanged;
-  CustomTextField(
-      {this.labelText,
-      this.maxLines = 1,
-      this.validator,
-      this.onSaved,
-      this.onChanged});
+  final initValue;
+  CustomTextField({
+    this.labelText,
+    this.maxLines = 1,
+    this.validator,
+    this.onSaved,
+    this.onChanged,
+    this.initValue,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -306,6 +350,7 @@ class CustomTextField extends StatelessWidget {
           fontFamily: "Rubik",
           fontSize: 20,
         ),
+        initialValue: initValue,
         maxLines: maxLines,
         validator: validator,
         onSaved: onSaved,

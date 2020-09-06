@@ -13,14 +13,14 @@ class Task {
 
 class TaskManager extends ChangeNotifier {
   List<Task> _tasks = [
-    // Task(
-    //   title: "Hey",
-    //   description:
-    //       "This is the description. Normally it's longer and contains\nline breaks that user specifys.",
-    //   deadLine: DateTime.now(),
-    //   id: "fjdbskjfbsdjkb",
-    //   taskStatus: TaskStatus.Open,
-    // )
+    Task(
+      title: "Hey",
+      description:
+          "This is the description. Normally it's longer and contains\nline breaks that user specifys.",
+      deadLine: DateTime.now(),
+      id: "fjdbskjfbsdjkb",
+      taskStatus: TaskStatus.Open,
+    )
   ];
 
   List<Task> get tasks {
