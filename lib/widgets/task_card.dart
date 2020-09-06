@@ -9,14 +9,12 @@ class TaskCard extends StatelessWidget {
   final Task task;
   final Color categoryColor;
   TaskCard(this.task, this.categoryColor);
-  @override
-  Widget build(BuildContext context) {
+
+  Widget _taskCardBuilder(BuildContext context, bool isDraggingCard) {
     return NeuCard(
-      bevel: 8,
-      curveType: CurveType.flat,
+      bevel: isDraggingCard ? 5 : 8,
+      curveType: isDraggingCard ? CurveType.flat : CurveType.concave,
       margin: EdgeInsets.all(10),
-      width: double.infinity,
-      // height: 300,
       decoration: NeumorphicDecoration(
         color: Color(0xff2A2A2A),
         // Color(0xff545454),
@@ -155,6 +153,27 @@ class TaskCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        return Draggable(
+          data: task,
+          child: _taskCardBuilder(context, false),
+          feedback: Material(
+            color: Colors.transparent,
+            child: Container(
+              width: width,
+              child: _taskCardBuilder(context, true),
+            ),
+          ),
+          childWhenDragging: SizedBox(),
+        );
+      },
     );
   }
 }

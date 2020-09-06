@@ -60,6 +60,12 @@ class TaskManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  void changeTaskStatus(String id, TaskStatus newStatus) {
+    final index = _tasks.indexWhere((element) => element.id == id);
+    _tasks[index].taskStatus = newStatus;
+    notifyListeners();
+  }
+
   Task getTaskById(String id) {
     return _tasks.firstWhere(
       (element) => element.id == id,

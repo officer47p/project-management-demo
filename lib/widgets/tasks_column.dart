@@ -80,37 +80,42 @@ class TasksColumn extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(
-              // padding: innerContentPadding,
-              decoration: BoxDecoration(
-                borderRadius: kTaskColumnDefaultBorderRadius,
-                boxShadow: [
-                  BoxShadow(
-                    color: categoryColor,
-                    blurRadius: 7,
-                    spreadRadius: 2,
-                  )
-                ],
-                color: Color(0xff2A2A2A),
-                //  Color(0xff545454),
-              ),
-              child: tasks.isEmpty
-                  ? Center(
-                      child: Text(
-                        "No $categoryName Task To Show\n🙄",
-                        style: TextStyle(
-                          fontFamily: "Rubik",
-                          fontSize: 24,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+            child: DragTarget<Task>(
+              onWillAccept: (data) => data.taskStatus != category,
+              onAccept: (data) =>
+                  Provider.of<TaskManager>(context, listen: false)
+                      .changeTaskStatus(data.id, category),
+              builder: (context, candidateData, rejectedData) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: kTaskColumnDefaultBorderRadius,
+                  boxShadow: [
+                    BoxShadow(
+                      color: categoryColor,
+                      blurRadius: 7,
+                      spreadRadius: 2,
                     )
-                  : ListView(
-                      physics: BouncingScrollPhysics(),
-                      children: tasks
-                          .map((task) => TaskCard(task, categoryColor))
-                          .toList(),
-                    ),
+                  ],
+                  color: Color(0xff2A2A2A),
+                  //  Color(0xff545454),
+                ),
+                child: tasks.isEmpty
+                    ? Center(
+                        child: Text(
+                          "No $categoryName Task To Show\n🙄",
+                          style: TextStyle(
+                            fontFamily: "Rubik",
+                            fontSize: 24,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    : ListView(
+                        physics: BouncingScrollPhysics(),
+                        children: tasks
+                            .map((task) => TaskCard(task, categoryColor))
+                            .toList(),
+                      ),
+              ),
             ),
           ),
         ],
