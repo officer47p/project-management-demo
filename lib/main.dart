@@ -4,6 +4,7 @@ import './consts.dart';
 import './enums.dart';
 
 import './screens/tasks_screen.dart';
+import './screens/auth_screen.dart';
 import './providers/task_manager.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        home: TasksScreen(),
+        home: AuthScreen(),
       ),
     );
   }

@@ -3,3 +3,8 @@ enum TaskStatus {
   InProgress,
   Done,
 }
+
+enum AuthType {
+  SignUp,
+  SignIn,
+}
